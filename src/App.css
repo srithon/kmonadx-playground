@@ -1,0 +1,24 @@
+#app {
+  height: 100vh;
+  max-height: 100vh;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+textarea[name='kbdx-input'] {
+  height: 90%;
+  width: 100%;
+}
+
+#kbdx-input {
+  white-space: pre-wrap;
+  font-family: monospace;
+}
+
+#compilation-output {
+  display: grid;
+  grid-template-rows: 50% 50%;
+
+  white-space: pre-wrap;
+  font-family: monospace;
+}
