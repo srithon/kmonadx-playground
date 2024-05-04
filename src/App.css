@@ -9,9 +9,7 @@
 textarea[name='kbdx-input'] {
   height: 90%;
   width: 100%;
-}
 
-#kbdx-input {
   white-space: pre-wrap;
   font-family: monospace;
 }
