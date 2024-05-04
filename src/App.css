@@ -3,6 +3,7 @@
   max-height: 100vh;
   display: grid;
   grid-template-columns: 50% 50%;
+  overflow: hidden;
 }
 
 textarea[name='kbdx-input'] {
@@ -16,9 +17,21 @@ textarea[name='kbdx-input'] {
 }
 
 #compilation-output {
+  max-height: inherit;
+
   display: grid;
   grid-template-rows: 50% 50%;
 
   white-space: pre-wrap;
   font-family: monospace;
+}
+
+#diagnostics {
+  max-height: inherit;
+  overflow: auto;
+}
+
+#kbd-output {
+  max-height: inherit;
+  overflow: auto;
 }
