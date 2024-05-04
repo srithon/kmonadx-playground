@@ -17,7 +17,7 @@ function App() {
     setDiagnostics(ansiUp.ansi_to_html(resultString));
     setKbdOutput(result.result);
 
-    result.free();
+    // don't need to free `result` because accessing `result` moves the value
   };
 
   // recompile 500ms after user stops typing
