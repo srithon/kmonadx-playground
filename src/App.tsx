@@ -23,7 +23,7 @@ function App() {
     const ansiUp = new AnsiUp();
     setDiagnostics(ansiUp.ansi_to_html(diagnostics));
 
-    const highlightedGeneratedCode = hljs.highlight(generatedCode, {language: 'lisp'}).value;
+    const highlightedGeneratedCode = hljs.highlight(generatedCode, { language: 'lisp' }).value;
     setKbdOutput(highlightedGeneratedCode);
 
     // don't need to free `compilationResult` because accessing `generated_code` moves the value
