@@ -9,15 +9,16 @@ function App() {
   const [kbdOutput, setKbdOutput] = useState('');
 
   const compile = () => {
-    let result = wasm.compile(kbdxInput);
+    let compilationResult = wasm.compile(kbdxInput);
+    const diagnostics = new TextDecoder().decode(compilationResult.diagnostics);
+    const generatedCode = compilationResult.generated_code;
+
     const ansiUp = new AnsiUp();
+    setDiagnostics(ansiUp.ansi_to_html(diagnostics));
 
-    const resultString = new TextDecoder().decode(result.diagnostics);
+    setKbdOutput(generatedCode);
 
-    setDiagnostics(ansiUp.ansi_to_html(resultString));
-    setKbdOutput(result.result);
-
-    // don't need to free `result` because accessing `result` moves the value
+    // don't need to free `compilationResult` because accessing `generated_code` moves the value
   };
 
   // recompile 500ms after user stops typing

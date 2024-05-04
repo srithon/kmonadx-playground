@@ -4,7 +4,7 @@ use wasm_bindgen::prelude::*;
 #[wasm_bindgen]
 pub struct CompilationResult {
     success: bool,
-    result: String,
+    generated_code: String,
     diagnostics: Vec<u8>,
 }
 
@@ -23,8 +23,8 @@ impl CompilationResult {
     }
 
     #[wasm_bindgen(getter)]
-    pub fn result(self) -> String {
-        self.result
+    pub fn generated_code(self) -> String {
+        self.generated_code
     }
 }
 
@@ -50,12 +50,12 @@ pub fn compile(text: &str) -> CompilationResult {
     match compilation_result {
         Ok(compiled_output) => CompilationResult {
             success: true,
-            result: compiled_output,
+            generated_code: compiled_output,
             diagnostics,
         },
         Err(_) => CompilationResult {
             success: false,
-            result: String::new(),
+            generated_code: String::new(),
             diagnostics,
         },
     }
