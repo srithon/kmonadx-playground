@@ -6,7 +6,16 @@
   overflow: hidden;
 }
 
-textarea[name='kbdx-input'] {
+#user-input {
+  max-height: inherit;
+}
+
+#user-input > .input-wrapper {
+  max-height: inherit;
+  overflow: scroll;
+}
+
+#kbdx-input {
   height: 100%;
   width: 100%;
 

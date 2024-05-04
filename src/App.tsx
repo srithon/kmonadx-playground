@@ -3,12 +3,17 @@ import * as wasm from '../kmonadx-wasm/pkg'
 import { AnsiUp } from 'ansi_up'
 import { useEffect, useState } from 'react'
 
+import Editor from 'react-simple-code-editor';
+
 import hljs from 'highlight.js/lib/core'
+// apparently toml = ini?
+import iniHighlighter from 'highlight.js/lib/languages/ini'
 import lispHighlighter from 'highlight.js/lib/languages/lisp'
 
 import 'highlight.js/styles/atom-one-dark-reasonable.min.css';
 
 hljs.registerLanguage('lisp', lispHighlighter);
+hljs.registerLanguage('ini', iniHighlighter);
 
 function App() {
   const [kbdxInput, setKbdxInput] = useState('');
@@ -41,7 +46,9 @@ function App() {
   return (
     <div id="app">
       <div id="user-input">
-        <textarea name="kbdx-input" value={kbdxInput} onChange={e => setKbdxInput(e.target.value)} />
+        <div className="input-wrapper">
+        <Editor id="kbdx-input" value={kbdxInput} onValueChange={code => setKbdxInput(code)} highlight={code => hljs.highlight(code, { language: 'ini' }).value} />
+        </div>
       </div>
       <div id="compilation-output">
         <div id="diagnostics" dangerouslySetInnerHTML={{ __html: diagnostics }}></div>
