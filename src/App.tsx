@@ -3,6 +3,13 @@ import * as wasm from '../kmonadx-wasm/pkg'
 import { AnsiUp } from 'ansi_up'
 import { useEffect, useState } from 'react'
 
+import hljs from 'highlight.js/lib/core'
+import lispHighlighter from 'highlight.js/lib/languages/lisp'
+
+import 'highlight.js/styles/atom-one-dark-reasonable.min.css';
+
+hljs.registerLanguage('lisp', lispHighlighter);
+
 function App() {
   const [kbdxInput, setKbdxInput] = useState('');
   const [diagnostics, setDiagnostics] = useState('');
@@ -16,7 +23,8 @@ function App() {
     const ansiUp = new AnsiUp();
     setDiagnostics(ansiUp.ansi_to_html(diagnostics));
 
-    setKbdOutput(generatedCode);
+    const highlightedGeneratedCode = hljs.highlight(generatedCode, {language: 'lisp'}).value;
+    setKbdOutput(highlightedGeneratedCode);
 
     // don't need to free `compilationResult` because accessing `generated_code` moves the value
   };
@@ -37,7 +45,9 @@ function App() {
       </div>
       <div id="compilation-output">
         <div id="diagnostics" dangerouslySetInnerHTML={{ __html: diagnostics }}></div>
-        <textarea name="kbd-output" value={kbdOutput} readOnly={true} />
+        <pre id="kbd-output">
+          <code dangerouslySetInnerHTML={{ __html: kbdOutput }}></code>
+        </pre>
       </div>
     </div>
   )
