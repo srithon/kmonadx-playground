@@ -44,3 +44,7 @@
   max-height: inherit;
   overflow: auto;
 }
+
+.container {
+  padding: 2em;
+}

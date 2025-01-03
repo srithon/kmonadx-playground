@@ -44,7 +44,7 @@ function App() {
   }, [kbdxInput]);
 
   return (
-    <div id="app">
+    <div id="app" className="container">
       <div id="user-input">
         <div className="input-wrapper">
         <Editor id="kbdx-input" value={kbdxInput} onValueChange={code => setKbdxInput(code)} highlight={code => hljs.highlight(code, { language: 'ini' }).value} />
