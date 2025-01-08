@@ -10,19 +10,22 @@
 
 #user-input {
   max-height: inherit;
+  background-color: #f0f0f0;
 }
 
 #user-input > .input-wrapper {
   max-height: inherit;
   overflow: scroll;
+  position: relative;
+  display: flex;
 }
 
 #kbdx-input {
   height: 100%;
   width: 100%;
-
   white-space: pre-wrap;
   font-family: monospace;
+  flex: 1;
 }
 
 #compilation-output {
@@ -45,6 +48,22 @@
   overflow: auto;
 }
 
-.container {
-  padding: 2em;
+.input-wrapper {
+  max-height: inherit;
+  overflow: scroll;
+  position: relative;
+  display: flex;
+}
+
+.line-numbers {
+  padding: 10px 0;
+  user-select: none;
+}
+
+.editor-line-number {
+  color: #6d6d6d;
+  text-align: right;
+  width: 3em;
+  padding-right: 0.5em;
+  font-family: monospace;
 }

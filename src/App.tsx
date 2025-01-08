@@ -1,7 +1,7 @@
 import './App.css'
 import * as wasm from '../kmonadx-wasm/pkg'
 import { AnsiUp } from 'ansi_up'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 
 import Editor from 'react-simple-code-editor';
 
@@ -19,6 +19,7 @@ function App() {
   const [kbdxInput, setKbdxInput] = useState('');
   const [diagnostics, setDiagnostics] = useState('');
   const [kbdOutput, setKbdOutput] = useState('');
+  const [lineCount, setLineCount] = useState(1);
 
   const compile = () => {
     let compilationResult = wasm.compile(kbdxInput);
@@ -43,11 +44,30 @@ function App() {
     return () => clearTimeout(timeoutId);
   }, [kbdxInput]);
 
+  const handleValueChange = (code: string) => {
+    setKbdxInput(code);
+    const lines = code.split('\n');
+    setLineCount(lines.length);
+  };
+
   return (
     <div id="app" className="container">
       <div id="user-input">
         <div className="input-wrapper">
-        <Editor id="kbdx-input" value={kbdxInput} onValueChange={code => setKbdxInput(code)} highlight={code => hljs.highlight(code, { language: 'ini' }).value} />
+          <div className="line-numbers">
+            {Array.from({ length: lineCount }, (_, i) => (
+              <div key={i + 1} className="editor-line-number">
+                {i + 1}
+              </div>
+            ))}
+          </div>
+          <Editor
+            id="kbdx-input"
+            value={kbdxInput}
+            onValueChange={handleValueChange}
+            highlight={code => hljs.highlight(code, { language: 'ini' }).value}
+            padding={10}
+          />
         </div>
       </div>
       <div id="compilation-output">
