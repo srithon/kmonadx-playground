@@ -25,7 +25,11 @@
   width: 100%;
   white-space: pre-wrap;
   font-family: monospace;
-  flex: 1;
+}
+
+#kbdx-input > * {
+  /* need to override react-simple-code-editor injected styles */
+  padding-left: 60px !important;
 }
 
 #compilation-output {
@@ -64,6 +68,8 @@
   color: #6d6d6d;
   text-align: right;
   width: 3em;
-  padding-right: 0.5em;
+  margin-right: 0.5em;
   font-family: monospace;
+  position: absolute;
+  left: 0;
 }

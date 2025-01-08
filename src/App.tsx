@@ -24,10 +24,9 @@ hljs.registerLanguage('lisp', lispHighlighter);
 hljs.registerLanguage('ini', iniHighlighter);
 
 function App() {
-  const [kbdxInput, setKbdxInput] = useState('');
+  const [kbdxInput, setKbdxInput] = useState(INITIAL_INPUT);
   const [diagnostics, setDiagnostics] = useState('');
   const [kbdOutput, setKbdOutput] = useState('');
-  const [lineCount, setLineCount] = useState(1);
 
   const compile = () => {
     let compilationResult = wasm.compile(kbdxInput);
@@ -52,33 +51,22 @@ function App() {
     return () => clearTimeout(timeoutId);
   }, [kbdxInput]);
 
-  const handleValueChange = (code: string) => {
-    setKbdxInput(code);
-    const lines = code.split('\n');
-    setLineCount(lines.length);
-  };
-
-  // sets the initial input while also updating the line count
-  useEffect(() => {
-    handleValueChange(INITIAL_INPUT);
-  }, []);
-
   return (
     <div id="app" className="container">
       <div id="user-input">
         <div className="input-wrapper">
-          <div className="line-numbers">
-            {Array.from({ length: lineCount }, (_, i) => (
-              <div key={i + 1} className="editor-line-number">
-                {i + 1}
-              </div>
-            ))}
-          </div>
           <Editor
             id="kbdx-input"
             value={kbdxInput}
-            onValueChange={handleValueChange}
-            highlight={code => hljs.highlight(code, { language: 'ini' }).value}
+            onValueChange={setKbdxInput}
+            highlight={code => {
+              const lines = code.split('\n');
+              return lines.map((line, i) => {
+                const lineNumber = `<span class="editor-line-number">${i + 1}</span>`;
+                const highlightedContent = hljs.highlight(line, { language: 'ini' }).value;
+                return lineNumber + highlightedContent;
+              }).join('\n');
+            }}
             padding={10}
           />
         </div>
