@@ -28,7 +28,7 @@ jobs:
 
       - name: Build Rust WASM package
         working-directory: ./kmonadx-wasm
-        run: wasm-pack build --target web
+        run: wasm-pack build
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
