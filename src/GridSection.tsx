@@ -4,9 +4,7 @@ const GridSection: React.FC<{ label: string; children: React.ReactNode; classNam
   return (
     <div className={`grid-section ${className}`} id={id}>
       <div className="grid-section-label">{label}</div>
-      <div className="scroll-wrapper" style={{ height: '100%' }}>
-        {children}
-      </div>
+      {children}
     </div>
   );
 };
