@@ -1,7 +1,8 @@
 import './App.css'
 import * as wasm from '../kmonadx-wasm/pkg'
 import { AnsiUp } from 'ansi_up'
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState } from 'react'
+import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels'
 
 import Editor from 'react-simple-code-editor';
 
@@ -55,34 +56,52 @@ function App() {
 
   return (
     <div id="app" className="container">
-      <GridSection label="KBDX Editor" className="input-wrapper">
-        <div className="scroll-wrapper">
-          <Editor
-            id="kbdx-input"
-            value={kbdxInput}
-            onValueChange={setKbdxInput}
-            highlight={code => {
-              const lines = code.split('\n');
-              return lines.map((line, i) => {
-                const lineNumber = `<span class="editor-line-number">${i + 1}</span>`;
-                const highlightedContent = hljs.highlight(line, { language: 'ini' }).value;
-                return lineNumber + highlightedContent;
-              }).join('\n');
-            }}
-            padding={5}
-          />
-        </div>
-      </GridSection>
-      <GridSection label="Compilation Diagnostics" id="diagnostics">
-        <pre className="scroll-wrapper">
-          <div dangerouslySetInnerHTML={{ __html: diagnostics }}></div>
-        </pre>
-      </GridSection>
-      <GridSection label="Kbd Output" id="kbd-output">
-        <pre className="scroll-wrapper">
-          <code dangerouslySetInnerHTML={{ __html: kbdOutput }}></code>
-        </pre>
-      </GridSection>
+      <PanelGroup direction="horizontal">
+        <Panel defaultSize={50} minSize={30}>
+          <GridSection label="KBDX Editor" className="input-wrapper">
+            <div className="scroll-wrapper">
+              <Editor
+                id="kbdx-input"
+                value={kbdxInput}
+                onValueChange={setKbdxInput}
+                highlight={code => {
+                  const lines = code.split('\n');
+                  return lines.map((line, i) => {
+                    const lineNumber = `<span class="editor-line-number">${i + 1}</span>`;
+                    const highlightedContent = hljs.highlight(line, { language: 'ini' }).value;
+                    return lineNumber + highlightedContent;
+                  }).join('\n');
+                }}
+                padding={5}
+              />
+            </div>
+          </GridSection>
+        </Panel>
+        
+        <PanelResizeHandle className="resize-handle vertical" />
+        
+        <Panel defaultSize={50} minSize={30}>
+          <PanelGroup direction="vertical">
+            <Panel defaultSize={33} minSize={20}>
+              <GridSection label="Compilation Diagnostics" id="diagnostics">
+                <pre className="scroll-wrapper">
+                  <div dangerouslySetInnerHTML={{ __html: diagnostics }}></div>
+                </pre>
+              </GridSection>
+            </Panel>
+            
+            <PanelResizeHandle className="resize-handle horizontal" />
+            
+            <Panel defaultSize={67} minSize={20}>
+              <GridSection label="Kbd Output" id="kbd-output">
+                <pre className="scroll-wrapper">
+                  <code dangerouslySetInnerHTML={{ __html: kbdOutput }}></code>
+                </pre>
+              </GridSection>
+            </Panel>
+          </PanelGroup>
+        </Panel>
+      </PanelGroup>
     </div>
   )
 }
