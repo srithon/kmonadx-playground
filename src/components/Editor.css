@@ -5,7 +5,7 @@
 
 #kbdx-input > * {
   padding-top: 0px !important;
-  padding-left: 60px !important;
+  padding-left: 4em !important;
 }
 
 .editor-line-number {
