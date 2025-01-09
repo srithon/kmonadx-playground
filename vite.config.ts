@@ -7,6 +7,9 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  // this makes all imports relative to the current file, so we don't have to
+  // worry about the app being deployed under a nested public path
+  base: "",
   plugins: [
     react(),
     wasm(),
