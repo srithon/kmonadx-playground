@@ -1,6 +1,7 @@
 import GridSection from '@components/GridSection';
 import './KbdOutput.css';
 import { useState } from 'react';
+import ActionButton from './ActionButton';
 
 interface KbdOutputProps {
   kbdOutput: string;
@@ -27,13 +28,13 @@ const CopyToClipboardButton = ({ rawKbdOutput }: CopyToClipboardButtonProps) => 
     };
 
     return (
-        <button 
+        <ActionButton 
             className="copy-button"
             onClick={handleCopy}
             style={copied ? {width: buttonWidth, height: buttonHeight} : {}}
         >
             {copied ? '✓ Copied!' : 'Copy to Clipboard'}
-        </button>
+        </ActionButton>
     );
 };
 

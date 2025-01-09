@@ -54,11 +54,15 @@ function App() {
     localStorage.setItem('kbdxInput', kbdxInput);
   }, [kbdxInput]);
 
+  const resetToTemplate = () => {
+    setKbdxInput(INITIAL_INPUT);
+  };
+
   return (
     <div id="app" className="container">
       <PanelGroup direction="horizontal">
         <Panel defaultSize={50} minSize={30}>
-          <Editor value={kbdxInput} onChange={setKbdxInput} />
+          <Editor value={kbdxInput} onChange={setKbdxInput} onReset={resetToTemplate} />
         </Panel>
         
         <PanelResizeHandle className="resize-handle vertical" />

@@ -2,15 +2,17 @@ import CodeEditor from 'react-simple-code-editor';
 import hljs from 'highlight.js/lib/core';
 import GridSection from '@components/GridSection';
 import './Editor.css';
+import ActionButton from './ActionButton';
 
 interface EditorProps {
   value: string;
   onChange: (value: string) => void;
+  onReset: () => void;
 }
 
-const Editor = ({ value, onChange }: EditorProps) => {
+const Editor = ({ value, onChange, onReset }: EditorProps) => {
   return (
-    <GridSection label="Kbdx Editor" className="input-wrapper">
+    <GridSection label="Kbdx Editor" className="input-wrapper" inlineContent={<ActionButton onClick={onReset}>Reset to Template</ActionButton>}>
       <div className="scroll-wrapper">
         <CodeEditor
           id="kbdx-input"
