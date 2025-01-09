@@ -21,7 +21,10 @@ hljs.registerLanguage('lisp', lispHighlighter);
 hljs.registerLanguage('ini', iniHighlighter);
 
 function App() {
-  const [kbdxInput, setKbdxInput] = useState(INITIAL_INPUT);
+  const [kbdxInput, setKbdxInput] = useState(() => {
+    const savedInput = localStorage.getItem('kbdxInput');
+    return savedInput ? savedInput : INITIAL_INPUT;
+  });
   const [diagnostics, setDiagnostics] = useState('');
   const [highlightedKbdOutput, setHighlightedKbdOutput] = useState('');
   const [rawKbdOutput, setRawKbdOutput] = useState('');
@@ -45,6 +48,10 @@ function App() {
     }, 500);
 
     return () => clearTimeout(timeoutId);
+  }, [kbdxInput]);
+
+  useEffect(() => {
+    localStorage.setItem('kbdxInput', kbdxInput);
   }, [kbdxInput]);
 
   return (
