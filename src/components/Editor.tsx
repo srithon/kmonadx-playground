@@ -8,11 +8,12 @@ interface EditorProps {
   value: string;
   onChange: (value: string) => void;
   onReset: () => void;
+  isTemplateState: boolean;
 }
 
-const Editor = ({ value, onChange, onReset }: EditorProps) => {
+const Editor = ({ value, onChange, onReset, isTemplateState }: EditorProps) => {
   return (
-    <GridSection label="Kbdx Editor" className="input-wrapper" inlineContent={<ActionButton onClick={onReset}>Reset to Template</ActionButton>}>
+    <GridSection label="Kbdx Editor" className="input-wrapper" inlineContent={<ActionButton onClick={onReset} disabled={isTemplateState}>Reset to Template</ActionButton>}>
       <div className="scroll-wrapper">
         <CodeEditor
           id="kbdx-input"

@@ -29,7 +29,6 @@ const CopyToClipboardButton = ({ rawKbdOutput }: CopyToClipboardButtonProps) => 
 
     return (
         <ActionButton 
-            className="copy-button"
             onClick={handleCopy}
             style={copied ? {width: buttonWidth, height: buttonHeight} : {}}
         >

@@ -21,9 +21,15 @@ hljs.registerLanguage('lisp', lispHighlighter);
 hljs.registerLanguage('ini', iniHighlighter);
 
 function App() {
+  const [isTemplateState, setIsTemplateState] = useState(true);
   const [kbdxInput, setKbdxInput] = useState(() => {
     const savedInput = localStorage.getItem('kbdxInput');
-    return savedInput ? savedInput : INITIAL_INPUT;
+    if (savedInput) {
+      setIsTemplateState(false);
+      return savedInput;
+    } else {
+      return INITIAL_INPUT;
+    }
   });
   const [diagnostics, setDiagnostics] = useState('');
   const [highlightedKbdOutput, setHighlightedKbdOutput] = useState('');
@@ -56,13 +62,19 @@ function App() {
 
   const resetToTemplate = () => {
     setKbdxInput(INITIAL_INPUT);
+    setIsTemplateState(true);
+  };
+
+  const onUserEdit = (value: string) => {
+    setKbdxInput(value);
+    setIsTemplateState(false);
   };
 
   return (
     <div id="app" className="container">
       <PanelGroup direction="horizontal">
         <Panel defaultSize={50} minSize={30}>
-          <Editor value={kbdxInput} onChange={setKbdxInput} onReset={resetToTemplate} />
+          <Editor value={kbdxInput} onChange={onUserEdit} onReset={resetToTemplate} isTemplateState={isTemplateState} />
         </Panel>
         
         <PanelResizeHandle className="resize-handle vertical" />
