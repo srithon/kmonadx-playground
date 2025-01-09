@@ -23,7 +23,8 @@ hljs.registerLanguage('ini', iniHighlighter);
 function App() {
   const [kbdxInput, setKbdxInput] = useState(INITIAL_INPUT);
   const [diagnostics, setDiagnostics] = useState('');
-  const [kbdOutput, setKbdOutput] = useState('');
+  const [highlightedKbdOutput, setHighlightedKbdOutput] = useState('');
+  const [rawKbdOutput, setRawKbdOutput] = useState('');
 
   const compile = () => {
     let compilationResult = wasm.compile(kbdxInput);
@@ -34,7 +35,8 @@ function App() {
     setDiagnostics(ansiUp.ansi_to_html(diagnostics));
 
     const highlightedGeneratedCode = hljs.highlight(generatedCode, { language: 'lisp' }).value;
-    setKbdOutput(highlightedGeneratedCode);
+    setHighlightedKbdOutput(highlightedGeneratedCode);
+    setRawKbdOutput(generatedCode);
   };
 
   useEffect(() => {
@@ -63,7 +65,7 @@ function App() {
             <PanelResizeHandle className="resize-handle horizontal" />
 
             <Panel defaultSize={66} minSize={20}>
-              <KbdOutput kbdOutput={kbdOutput} />
+              <KbdOutput kbdOutput={highlightedKbdOutput} rawKbdOutput={rawKbdOutput} />
             </Panel>
           </PanelGroup>
         </Panel>
