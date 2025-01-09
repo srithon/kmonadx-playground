@@ -1,62 +1,58 @@
 #app {
   height: 100vh;
   max-height: 100vh;
+  width: 100vw;
+  max-width: 100vw;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 2fr;
+  grid-template-areas: 
+    "input diagnostics"
+    "input output";
   overflow: hidden;
 
   font-size: 1.2rem;
-}
-
-#user-input {
-  max-height: inherit;
   background-color: #f0f0f0;
 }
 
-#user-input > .input-wrapper {
-  max-height: inherit;
+.input-wrapper {
+  grid-area: input;
+}
+
+.scroll-wrapper {
+  height: 100%;
+  width: 100%;
   overflow: scroll;
-  position: relative;
-  display: flex;
 }
 
 #kbdx-input {
-  height: 100%;
-  width: 100%;
   white-space: pre-wrap;
   font-family: monospace;
 }
 
 #kbdx-input > * {
   /* need to override react-simple-code-editor injected styles */
+  padding-top: 0px !important;
   padding-left: 60px !important;
 }
 
 #compilation-output {
   max-height: inherit;
 
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-
   white-space: pre-wrap;
   font-family: monospace;
 }
 
 #diagnostics {
+  grid-area: diagnostics;
   max-height: inherit;
   overflow: auto;
 }
 
 #kbd-output {
+  grid-area: output;
   max-height: inherit;
   overflow: auto;
-}
-
-.input-wrapper {
-  max-height: inherit;
-  overflow: scroll;
-  position: relative;
-  display: flex;
 }
 
 .line-numbers {
@@ -72,4 +68,18 @@
   font-family: monospace;
   position: absolute;
   left: 0;
+}
+
+.grid-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  border: 1px solid #e0e0e0;
+}
+
+.grid-section-label {
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 5px;
 }

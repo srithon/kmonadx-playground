@@ -13,6 +13,8 @@ import lispHighlighter from 'highlight.js/lib/languages/lisp'
 import 'highlight.js/styles/atom-one-dark-reasonable.min.css';
 import { INITIAL_INPUT as _INITIAL_INPUT } from './App.compile';
 
+import GridSection from './GridSection';
+
 // this makes the language server happy; the compile time plugin transforms the
 // INITIAL_INPUT async function into a function which returns the final string
 // result, but the language server thinks that when we import INITIAL_INPUT,
@@ -53,8 +55,8 @@ function App() {
 
   return (
     <div id="app" className="container">
-      <div id="user-input">
-        <div className="input-wrapper">
+      <GridSection label="KBDX Editor" className="input-wrapper">
+        <div className="scroll-wrapper">
           <Editor
             id="kbdx-input"
             value={kbdxInput}
@@ -67,16 +69,20 @@ function App() {
                 return lineNumber + highlightedContent;
               }).join('\n');
             }}
-            padding={10}
+            padding={5}
           />
         </div>
-      </div>
-      <div id="compilation-output">
-        <div id="diagnostics" dangerouslySetInnerHTML={{ __html: diagnostics }}></div>
-        <pre id="kbd-output">
+      </GridSection>
+      <GridSection label="Compilation Diagnostics" id="diagnostics">
+        <pre className="scroll-wrapper">
+          <div dangerouslySetInnerHTML={{ __html: diagnostics }}></div>
+        </pre>
+      </GridSection>
+      <GridSection label="Kbd Output" id="kbd-output">
+        <pre className="scroll-wrapper">
           <code dangerouslySetInnerHTML={{ __html: kbdOutput }}></code>
         </pre>
-      </div>
+      </GridSection>
     </div>
   )
 }
