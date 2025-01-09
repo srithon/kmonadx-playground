@@ -1,0 +1,11 @@
+:root {
+  --vh: 100vh;
+  --vw: 100vw;
+  --font-size: 1.2rem;
+  --bg-color: #f0f0f0;
+  --handle-size: 5px;
+  --handle-bg-color: #e0e0e0;
+  --handle-hover-bg-color: #c0c0c0;
+  --handle-active-bg-color: #a0a0a0;
+  --line-number-color: #6d6d6d;
+} 

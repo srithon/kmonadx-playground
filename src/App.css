@@ -1,14 +1,4 @@
-:root {
-  --vh: 100vh;
-  --vw: 100vw;
-  --font-size: 1.2rem;
-  --bg-color: #f0f0f0;
-  --handle-size: 5px;
-  --handle-bg-color: #e0e0e0;
-  --handle-hover-bg-color: #c0c0c0;
-  --handle-active-bg-color: #a0a0a0;
-  --line-number-color: #6d6d6d;
-}
+@import './styles/variables.css';
 
 #app {
   height: var(--vh);
@@ -45,65 +35,6 @@
 
 .resize-handle[data-resize-handle-active] {
   background-color: var(--handle-active-bg-color);
-}
-
-#kbdx-input {
-  white-space: pre-wrap;
-  font-family: monospace;
-}
-
-#kbdx-input > * {
-  /* need to override react-simple-code-editor injected styles */
-  padding-top: 0px !important;
-  padding-left: 60px !important;
-}
-
-#compilation-output {
-  max-height: inherit;
-
-  white-space: pre-wrap;
-  font-family: monospace;
-}
-
-#diagnostics {
-  grid-area: diagnostics;
-  max-height: inherit;
-  overflow: auto;
-}
-
-#kbd-output {
-  grid-area: output;
-  max-height: inherit;
-  overflow: auto;
-}
-
-.line-numbers {
-  padding: 10px 0;
-  user-select: none;
-}
-
-.editor-line-number {
-  color: var(--line-number-color);
-  text-align: right;
-  width: 3em;
-  margin-right: 0.5em;
-  font-family: monospace;
-  position: absolute;
-  left: 0;
-}
-
-.grid-section {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  border: 1px solid #e0e0e0;
-  height: 100%;
-}
-
-.grid-section-label {
-  font-weight: bold;
-  font-size: 1.2rem;
-  padding: 5px;
 }
 
 .scroll-wrapper {
